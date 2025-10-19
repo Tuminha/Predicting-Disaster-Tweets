@@ -146,7 +146,7 @@ disaster_tweets/
 
 ### Phase 1: PyTorch Fundamentals
 - [x] **Exploration**: Complete EDA and understand data distribution
-- [ ] **Preprocessing**: Build robust text cleaning pipeline
+- [x] **Preprocessing**: Build robust text cleaning pipeline
 - [ ] **Data Pipeline**: Create vocabulary and efficient data loaders
 - [ ] **Model Architecture**: Design and implement PyTorch classifier
 - [ ] **Training**: Implement training loop with proper validation
@@ -174,9 +174,9 @@ disaster_tweets/
 
 ---
 
-## 📊 Key Findings from Exploration
+## 📊 Key Findings from Exploration & Preprocessing
 
-Based on the comprehensive EDA completed in `00_exploration.ipynb`:
+Based on the comprehensive EDA and preprocessing completed in `00_exploration.ipynb` and `01_preprocessing.ipynb`:
 
 ### Dataset Characteristics
 - **Size**: 7,613 training tweets
@@ -188,10 +188,32 @@ Based on the comprehensive EDA completed in `00_exploration.ipynb`:
 - **Average word count**: ~15 words per tweet
 - **Social media features**: URLs (0.62 avg), hashtags (0.45 avg), mentions (0.36 avg)
 
+### Preprocessing Pipeline Results
+- **Domain-aware stopword removal**: Preserved 50 critical disaster-related keywords
+- **Comprehensive text cleaning**: URL removal, mention/hashtag handling, emoji conversion
+- **Smart text normalization**: Number-to-text conversion, whitespace normalization
+- **Feature engineering**: Boolean flags for social media elements (hashtags, mentions, URLs)
+- **BERT comparison**: Custom preprocessing produces 4.3x fewer tokens than BERT tokenizer
+
 ### Vocabulary Insights
 - **Disaster tweets**: High frequency of words like "fire", "suicide", "disaster", "police", "killed"
 - **Non-disaster tweets**: More general words like "like", "new", "get", "one", "body"
 - **Clear linguistic patterns** distinguish the two classes
+
+### 🛠 Technical Achievements
+
+**Preprocessing Pipeline Excellence:**
+- ✅ **Smart Emoji Handling**: Converts emojis to meaningful text (🔥 → "fire")
+- ✅ **Domain-Aware Processing**: Preserves disaster keywords while removing noise
+- ✅ **Comprehensive Cleaning**: Handles URLs, mentions, hashtags, punctuation
+- ✅ **Feature Engineering**: Creates boolean flags for social media elements
+- ✅ **BERT Comparison**: Demonstrates 4.3x efficiency advantage over transformer tokenization
+
+**Data Quality Improvements:**
+- **Clean datasets** saved to `data/interim/` folder
+- **Consistent preprocessing** applied to both train and test sets
+- **Validation pipeline** ensures data integrity and column consistency
+- **Performance tracking** with word count differences for quality assurance
 
 ### 🖼 Visualizations
 <div align="center">
@@ -224,6 +246,21 @@ Based on the comprehensive EDA completed in `00_exploration.ipynb`:
 | Evaluation | Scikit-learn | Metrics & validation |
 | NLP (Phase 2) | HuggingFace | Transformers & tokenization |
 | Development | Jupyter | Interactive learning |
+
+---
+
+## 📝 Learning Journey
+
+**Completed Skills:**
+- **Data Exploration**: Comprehensive EDA with statistical analysis and visualizations
+- **Text Preprocessing**: Domain-aware cleaning pipeline with emoji handling and feature engineering
+- **NLP Fundamentals**: Understanding of tokenization, stopword removal, and text normalization
+- **Code Quality**: Professional implementation with error handling and comprehensive testing
+- **Comparative Analysis**: Custom vs. transformer tokenization evaluation
+
+**In Progress:**
+- **Vocabulary Building**: Creating word-to-index mappings and sequence conversion
+- **PyTorch Data Loaders**: Implementing efficient batching and data pipeline
 
 ---
 
