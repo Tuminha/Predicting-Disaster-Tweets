@@ -145,7 +145,7 @@ disaster_tweets/
 ## 🎯 Milestone Progress
 
 ### Phase 1: PyTorch Fundamentals
-- [ ] **Exploration**: Complete EDA and understand data distribution
+- [x] **Exploration**: Complete EDA and understand data distribution
 - [ ] **Preprocessing**: Build robust text cleaning pipeline
 - [ ] **Data Pipeline**: Create vocabulary and efficient data loaders
 - [ ] **Model Architecture**: Design and implement PyTorch classifier
@@ -171,6 +171,46 @@ disaster_tweets/
 - Questions and research directions
 
 **Philosophy**: Every experiment should be logged. Every mistake is a learning opportunity.
+
+---
+
+## 📊 Key Findings from Exploration
+
+Based on the comprehensive EDA completed in `00_exploration.ipynb`:
+
+### Dataset Characteristics
+- **Size**: 7,613 training tweets
+- **Balance**: 43% disaster vs 57% non-disaster (slightly imbalanced)
+- **Missing Data**: 61 missing keywords, 2,533 missing locations (33%)
+
+### Text Patterns
+- **Average tweet length**: ~100 characters
+- **Average word count**: ~15 words per tweet
+- **Social media features**: URLs (0.62 avg), hashtags (0.45 avg), mentions (0.36 avg)
+
+### Vocabulary Insights
+- **Disaster tweets**: High frequency of words like "fire", "suicide", "disaster", "police", "killed"
+- **Non-disaster tweets**: More general words like "like", "new", "get", "one", "body"
+- **Clear linguistic patterns** distinguish the two classes
+
+### 🖼 Visualizations
+<div align="center">
+
+<img src="images/Tweet Length Distribution.png" alt="Tweet Length Distribution showing character count patterns" width="680" />
+
+<br /><br />
+
+<img src="images/Word Count Distribution.png" alt="Word Count Distribution showing vocabulary patterns" width="680" />
+
+<br /><br />
+
+<img src="images/Sentence Count Distribution.png" alt="Sentence Count Distribution showing text structure patterns" width="680" />
+
+<br /><br />
+
+<img src="images/wordclouds.png" alt="Word Clouds comparing disaster vs non-disaster tweet vocabulary" width="680" />
+
+</div>
 
 ---
 
