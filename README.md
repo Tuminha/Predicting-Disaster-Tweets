@@ -221,6 +221,12 @@ Based on the comprehensive EDA and preprocessing completed in `00_exploration.ip
 - **Encoding Issues**: Detected and analyzed non-ASCII characters in vocabulary
 - **Preprocessing Validation**: Tested and refined text cleaning functions with comprehensive test cases
 
+**Text-to-Sequence Conversion:**
+- **Vocabulary Structure**: Implemented proper special token placement (<PAD> at index 0, <UNK> at index 1)
+- **Sequence Conversion**: Created function to convert text to numerical indices with padding and truncation
+- **Unknown Word Handling**: Implemented fallback mechanism for words not in vocabulary
+- **Sequence Normalization**: Added padding to ensure consistent sequence lengths for batch processing
+
 ### 🖼 Visualizations
 <div align="center">
 
@@ -265,7 +271,8 @@ Based on the comprehensive EDA and preprocessing completed in `00_exploration.ip
 - **Comparative Analysis**: Custom vs. transformer tokenization evaluation
 
 **In Progress:**
-- **Vocabulary Building**: ✅ Identified data quality issues and preprocessing pipeline debugging
+- **Vocabulary Building**: ✅ Completed vocabulary creation with proper special token handling
+- **Text-to-Sequence Conversion**: ✅ Implemented function to convert text to numerical indices
 - **PyTorch Data Loaders**: Implementing efficient batching and data pipeline
 
 ---
