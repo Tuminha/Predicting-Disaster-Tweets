@@ -227,6 +227,12 @@ Based on the comprehensive EDA and preprocessing completed in `00_exploration.ip
 - **Unknown Word Handling**: Implemented fallback mechanism for words not in vocabulary
 - **Sequence Normalization**: Added padding to ensure consistent sequence lengths for batch processing
 
+**PyTorch Data Pipeline:**
+- **Custom Dataset Class**: Implemented DisasterTweetsDataset inheriting from torch.utils.data.Dataset
+- **Data Loading**: Created DataLoader with batching, shuffling, and collate function
+- **Tensor Conversion**: Proper conversion of text sequences and labels to PyTorch tensors
+- **Batch Processing**: Efficient handling of variable-length sequences with padding
+
 ### 🖼 Visualizations
 <div align="center">
 
@@ -273,7 +279,7 @@ Based on the comprehensive EDA and preprocessing completed in `00_exploration.ip
 **In Progress:**
 - **Vocabulary Building**: ✅ Completed vocabulary creation with proper special token handling
 - **Text-to-Sequence Conversion**: ✅ Implemented function to convert text to numerical indices
-- **PyTorch Data Loaders**: Implementing efficient batching and data pipeline
+- **PyTorch Data Loaders**: ✅ Custom Dataset class implemented with DataLoader integration
 
 ---
 
