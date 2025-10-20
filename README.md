@@ -215,6 +215,12 @@ Based on the comprehensive EDA and preprocessing completed in `00_exploration.ip
 - **Validation pipeline** ensures data integrity and column consistency
 - **Performance tracking** with word count differences for quality assurance
 
+**Vocabulary Building Progress:**
+- **Dataset Analysis**: Identified 14,644 unique words in cleaned training data
+- **Data Quality Debugging**: Discovered preprocessing pipeline edge cases and UNK token handling
+- **Encoding Issues**: Detected and analyzed non-ASCII characters in vocabulary
+- **Preprocessing Validation**: Tested and refined text cleaning functions with comprehensive test cases
+
 ### 🖼 Visualizations
 <div align="center">
 
@@ -259,7 +265,7 @@ Based on the comprehensive EDA and preprocessing completed in `00_exploration.ip
 - **Comparative Analysis**: Custom vs. transformer tokenization evaluation
 
 **In Progress:**
-- **Vocabulary Building**: Creating word-to-index mappings and sequence conversion
+- **Vocabulary Building**: ✅ Identified data quality issues and preprocessing pipeline debugging
 - **PyTorch Data Loaders**: Implementing efficient batching and data pipeline
 
 ---
