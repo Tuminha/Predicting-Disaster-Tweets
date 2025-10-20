@@ -124,8 +124,8 @@ disaster_tweets/
 ├── README.md                    # This file
 ├── data/
 │   ├── raw/                    # Untouched Kaggle CSVs
-│   ├── interim/               # Cleaned/preprocessed data
-│   └── processed/             # Features and final tensors
+│   ├── interim/               # Cleaned/preprocessed data (train_cleaned.csv, test_cleaned.csv)
+│   └── processed/             # Model-ready artifacts (vocab_dict.pkl, vocab_info.json)
 ├── notebooks/
 │   ├── 00_exploration.ipynb   # Data exploration (TODO-based)
 │   ├── 01_preprocessing.ipynb # Text cleaning (TODO-based)
@@ -232,6 +232,9 @@ Based on the comprehensive EDA and preprocessing completed in `00_exploration.ip
 - **Data Loading**: Created DataLoader with batching, shuffling, and collate function
 - **Tensor Conversion**: Proper conversion of text sequences and labels to PyTorch tensors
 - **Batch Processing**: Efficient handling of variable-length sequences with padding
+- **Vocabulary Export**: Saved vocabulary dictionary and metadata for reuse across notebooks
+  - `data/processed/vocab_dict.pkl` - Word to index mapping (14,890 words)
+  - `data/processed/vocab_info.json` - Metadata (vocab size, special tokens, max length)
 - **Validation Results**:
   - Batch shape: `torch.Size([32, 50])` ✅
   - Labels shape: `torch.Size([32])` ✅

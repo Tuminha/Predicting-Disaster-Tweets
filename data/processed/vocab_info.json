@@ -1,0 +1,29 @@
+{
+  "vocab_size": 3160,
+  "max_seq_length": 50,
+  "pad_idx": 0,
+  "unk_idx": 1,
+  "most_common_words": [
+    "<PAD>",
+    "<UNK>",
+    "hundred",
+    "one",
+    "two",
+    "thousand",
+    "like",
+    "amp",
+    "fire",
+    "get",
+    "new",
+    "via",
+    "three",
+    "people",
+    "news",
+    "video",
+    "emergency",
+    "disaster",
+    "police",
+    "five"
+  ],
+  "date_created": "2025-10-20 21:20:53.145198"
+}
