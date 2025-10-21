@@ -54,7 +54,7 @@
 - [x] Complete data exploration and EDA ✅
 - [x] Implement text preprocessing pipeline ✅
 - [x] Build vocabulary and custom data loaders ✅
-- [ ] Create PyTorch baseline model
+- [x] Create PyTorch baseline model ✅
 - [ ] Train and evaluate model properly
 - [ ] Generate Kaggle submission
 - [ ] Enhance with HuggingFace transformers
@@ -136,8 +136,9 @@ disaster_tweets/
 │   └── 99_lab_notes.ipynb     # Learning log and insights
 ├── src/
 │   ├── utils/                 # Utility functions (empty)
-│   └── models/               # Model definitions (empty)
-└── images/                   # Plots and visualizations
+│   └── models/                # Model definitions
+│       └── baseline_model.py  # DisasterTweetClassifier implementation
+└── images/                    # Plots and visualizations
 ```
 
 ---
@@ -147,8 +148,8 @@ disaster_tweets/
 ### Phase 1: PyTorch Fundamentals
 - [x] **Exploration**: Complete EDA and understand data distribution
 - [x] **Preprocessing**: Build robust text cleaning pipeline
-- [ ] **Data Pipeline**: Create vocabulary and efficient data loaders
-- [ ] **Model Architecture**: Design and implement PyTorch classifier
+- [x] **Data Pipeline**: Create vocabulary and efficient data loaders
+- [x] **Model Architecture**: Design and implement PyTorch classifier
 - [ ] **Training**: Implement training loop with proper validation
 - [ ] **Evaluation**: Calculate metrics and analyze performance
 - [ ] **Submission**: Generate valid Kaggle submission file
@@ -242,6 +243,32 @@ Based on the comprehensive EDA and preprocessing completed in `00_exploration.ip
   - Data type: `torch.int64` ✅
 - **Status**: Pipeline fully operational and ready for model training! 🚀
 
+**PyTorch Model Architecture:** ✅ **COMPLETE**
+- **Model Class**: DisasterTweetClassifier (inheriting from nn.Module)
+- **Architecture Design**:
+  - **Embedding Layer**: Converts word indices to 100-dimensional dense vectors (3,160 vocab × 100 dims = 316,000 params)
+  - **Mean Pooling**: Aggregates variable-length sequences to fixed-size representation
+  - **Hidden Layer**: Fully connected layer (100 → 128) with ReLU activation
+  - **Dropout**: 0.5 dropout rate for regularization
+  - **Output Layer**: Binary classification head (128 → 1)
+- **Model Statistics**:
+  - Total trainable parameters: **329,057**
+  - Input shape: `[batch_size, seq_length]` (e.g., `[32, 50]`)
+  - Output shape: `[batch_size, 1]` (raw logits)
+- **Training Configuration**:
+  - Loss function: `BCEWithLogitsLoss()` (numerically stable sigmoid + BCE)
+  - Optimizer: Adam (lr=0.001, default betas)
+  - Scheduler: StepLR (step_size=5, gamma=0.1)
+- **Model Modularity**: 
+  - Saved to `src/models/baseline_model.py` for reuse across notebooks
+  - Proper Python path configuration for importing from notebooks
+- **Validation**:
+  - ✅ Forward pass tested with dummy data
+  - ✅ Loss calculation working correctly
+  - ✅ Gradients computed successfully
+  - ✅ Model works with real batches from DataLoader
+- **Status**: Model architecture complete and ready for training! 🎯
+
 ### 🖼 Visualizations
 <div align="center">
 
@@ -287,6 +314,13 @@ Based on the comprehensive EDA and preprocessing completed in `00_exploration.ip
 - **Vocabulary Building**: ✅ Vocabulary creation with proper special token handling and frequency analysis
 - **Text-to-Sequence Conversion**: ✅ Text to numerical indices with padding and truncation
 - **PyTorch Data Pipeline**: ✅ Complete data pipeline with Dataset, DataLoader, and batching
+- **Neural Network Architecture**: ✅ Designed and implemented custom PyTorch model for text classification
+- **Word Embeddings**: ✅ Understanding of dense embeddings vs. one-hot encoding
+- **Loss Functions & Optimizers**: ✅ Configured BCE loss and Adam optimizer for binary classification
+- **Model Debugging**: ✅ Tested forward/backward passes, verified gradients and shapes
+
+**In Progress:**
+- **Training Loops**: Learning to train models with proper validation
 
 **Ready for Model Training!** 🚀
 
