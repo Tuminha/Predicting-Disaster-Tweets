@@ -1,5 +1,5 @@
 {
-  "vocab_size": 3160,
+  "vocab_size": 14646,
   "max_seq_length": 50,
   "pad_idx": 0,
   "unk_idx": 1,
@@ -25,5 +25,5 @@
     "police",
     "five"
   ],
-  "date_created": "2025-10-20 21:20:53.145198"
+  "date_created": "2025-10-21 18:47:00.740650"
 }

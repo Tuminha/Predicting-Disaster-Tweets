@@ -12,7 +12,7 @@ class DisasterTweetClassifier(nn.Module):
             padding_idx=padding_idx)
         self.fc1 = nn.Linear(embedding_dim, hidden_dim)
         self.relu = nn.ReLU()
-        self.dropout = nn.Dropout(0.5)
+        self.dropout = nn.Dropout(0.6)
         self.fc2 = nn.Linear(hidden_dim, 1)
 
     def forward(self, x):

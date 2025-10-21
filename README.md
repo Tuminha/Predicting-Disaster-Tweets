@@ -55,7 +55,7 @@
 - [x] Implement text preprocessing pipeline ✅
 - [x] Build vocabulary and custom data loaders ✅
 - [x] Create PyTorch baseline model ✅
-- [ ] Train and evaluate model properly
+- [x] Train and evaluate model properly ✅ **80% Validation Accuracy!**
 - [ ] Generate Kaggle submission
 - [ ] Enhance with HuggingFace transformers
 
@@ -150,8 +150,8 @@ disaster_tweets/
 - [x] **Preprocessing**: Build robust text cleaning pipeline
 - [x] **Data Pipeline**: Create vocabulary and efficient data loaders
 - [x] **Model Architecture**: Design and implement PyTorch classifier
-- [ ] **Training**: Implement training loop with proper validation
-- [ ] **Evaluation**: Calculate metrics and analyze performance
+- [x] **Training**: Implement training loop with proper validation
+- [x] **Evaluation**: Calculate metrics and analyze performance
 - [ ] **Submission**: Generate valid Kaggle submission file
 
 ### Phase 2: Transformers Enhancement
@@ -269,7 +269,164 @@ Based on the comprehensive EDA and preprocessing completed in `00_exploration.ip
   - ✅ Model works with real batches from DataLoader
 - **Status**: Model architecture complete and ready for training! 🎯
 
-### 🖼 Visualizations
+---
+
+## 🏋️ **Model Training & Results** ✅ **COMPLETE**
+
+### **Final Model Performance: 80% Validation Accuracy! 🎯**
+
+After systematic experimentation and hyperparameter tuning, achieved **80% validation accuracy** with excellent generalization:
+
+| Metric | Final Result | Status |
+|--------|-------------|--------|
+| **Validation Accuracy** | **80.0%** | 🎯 Target achieved! |
+| **F1-Score (Disaster)** | **0.76** | Strong performance |
+| **Precision (Disaster)** | **78%** | High confidence predictions |
+| **Recall (Disaster)** | **74%** | Catching most disasters |
+| **Train/Val Gap** | **13%** | Healthy generalization |
+
+### **The Experimental Journey: From 72% → 80%**
+
+**Model Evolution Through 4 Iterations:**
+
+| Iteration | Architecture | Val Acc | F1-Score | Key Learning |
+|-----------|-------------|---------|----------|--------------|
+| **Baseline** | vocab=3K, emb=100, hidden=128 | 72.0% | 0.68 | Severe overfitting (26% gap) |
+| **V2** | vocab=41K, emb=50, hidden=64 | 77.7% | 0.74 | Better architecture |
+| **V3** | + LR=1e-5, weight_decay=1e-4 | 79.4% | 0.75 | Perfect regularization |
+| **Final** | + 6 epochs (early stopping) | **80.0%** | **0.76** | **Target achieved!** 🎉 |
+
+### **Key Discoveries:**
+
+1. **Vocabulary Size Matters** 📚
+   - Increasing from 3,160 → 41,400 words captured critical disaster-specific terms
+   - Rare words like "tsunami", "wildfire" are essential for classification
+
+2. **Smaller Networks Generalize Better** 🎯
+   - Reduced embedding_dim (100 → 50) and hidden_dim (128 → 64)
+   - Less capacity to memorize = better generalization
+
+3. **Learning Rate is Critical** 🐌
+   - Lowering from 0.001 → 0.00001 (100× slower) enabled careful learning
+   - Prevented overfitting while maintaining accuracy
+
+4. **Multiple Regularization Techniques Stack** 🧱
+   - Dropout (0.6) + Weight Decay (1e-4) + Early Stopping worked together
+   - Each contributed to preventing overfitting
+
+5. **Early Stopping Saves You** ⏹️
+   - Best performance at Epoch 5 (79.8%)
+   - Training beyond that point increased overfitting without gains
+
+### **Final Model Configuration:**
+
+```python
+# Optimized Hyperparameters
+vocab_size = 41,400        # Large vocabulary for rare disaster terms
+embedding_dim = 50         # Compact embeddings prevent memorization
+hidden_dim = 64            # Simple architecture for generalization
+dropout = 0.6              # Strong regularization
+learning_rate = 1e-5       # Slow, careful learning
+weight_decay = 1e-4        # L2 regularization
+num_epochs = 6             # Early stopping at peak performance
+batch_size = 32            # Standard batch size
+```
+
+### **Training Dynamics:**
+
+```
+Epoch 1: Train 55.2% | Val 57.3%  ← Slow start
+Epoch 2: Train 63.8% | Val 72.6%  ← Fast learning
+Epoch 3: Train 78.1% | Val 77.0%  ← Convergence
+Epoch 4: Train 85.7% | Val 79.4%  ← Optimal point
+Epoch 5: Train 90.8% | Val 79.8%  ← Peak validation! 🎯
+Epoch 6: Train 93.0% | Val 80.0%  ← Plateau reached
+```
+
+### **Confusion Matrix Analysis:**
+
+**Final Model Predictions (Validation Set):**
+
+```
+                    PREDICTED
+                Not Disaster  |  Disaster
+        ----------------------------------------
+ACTUAL  Not Disaster  |   734    |    135      (84% correct)
+        Disaster      |   173    |    481      (74% correct)
+```
+
+**Real-World Impact:**
+- ✅ **734 correct non-disaster identifications** (84% of 869)
+- ✅ **481 disasters correctly detected** (74% of 654)
+- ⚠️ **173 missed disasters** (26% false negative rate)
+- ⚠️ **135 false alarms** (16% false positive rate)
+
+**Compared to first model:**
+- 40 fewer missed disasters (-19%)
+- 83 fewer false alarms (-38%)
+- Overall improvement across all metrics!
+
+### **Classification Report:**
+
+```
+              precision    recall  f1-score   support
+
+Not Disaster     0.81      0.84      0.83       869
+    Disaster     0.78      0.74      0.76       654
+
+    accuracy                           0.80      1523
+   macro avg       0.80      0.79      0.79      1523
+weighted avg       0.80      0.80      0.80      1523
+```
+
+**Balanced Performance:**
+- Both classes perform well (F1: 0.83 and 0.76)
+- No significant bias toward majority class
+- Model works reliably for both disaster and non-disaster tweets
+
+### 🖼 **Training Visualizations**
+
+<div align="center">
+
+<img src="images/loss and accuracy curves 6 epochs.png" alt="Training progress showing loss and accuracy curves over 6 epochs" width="800" />
+
+*Loss and accuracy curves showing healthy convergence with minimal overfitting*
+
+<br /><br />
+
+<img src="images/cf 6 epochs.png" alt="Confusion matrix showing final model predictions on validation set" width="600" />
+
+*Confusion matrix: 80% overall accuracy with balanced performance across classes*
+
+</div>
+
+### **🎓 Lessons Learned:**
+
+1. **Overfitting Diagnosis:**
+   - Train/val accuracy gap is the key metric
+   - 25%+ gap = severe overfitting
+   - 5-15% gap = healthy learning
+   - <5% gap = potentially underfitting
+
+2. **Hyperparameter Tuning:**
+   - Start with learning rate (biggest impact)
+   - Then regularization (dropout, weight decay)
+   - Finally architecture (embedding/hidden dims)
+   - Each iteration should improve validation metrics
+
+3. **The Bias-Variance Trade-off:**
+   - Large models = high variance (overfit)
+   - Small models = high bias (underfit)
+   - Sweet spot = 80% accuracy with 13% gap
+
+4. **When to Stop:**
+   - Monitor validation loss
+   - Stop when it plateaus or increases
+   - Don't chase training accuracy!
+
+---
+
+### 🖼 **Exploration Visualizations**
 <div align="center">
 
 <img src="images/Tweet Length Distribution.png" alt="Tweet Length Distribution showing character count patterns" width="680" />
@@ -318,11 +475,21 @@ Based on the comprehensive EDA and preprocessing completed in `00_exploration.ip
 - **Word Embeddings**: ✅ Understanding of dense embeddings vs. one-hot encoding
 - **Loss Functions & Optimizers**: ✅ Configured BCE loss and Adam optimizer for binary classification
 - **Model Debugging**: ✅ Tested forward/backward passes, verified gradients and shapes
+- **Training Loops**: ✅ Implemented complete training pipeline with proper validation
+- **Hyperparameter Tuning**: ✅ Systematic experimentation and optimization (4 iterations, 72% → 80%)
+- **Regularization Techniques**: ✅ Applied dropout, weight decay, and early stopping effectively
+- **Overfitting Diagnosis**: ✅ Identified and fixed overfitting through multiple techniques
+- **Performance Evaluation**: ✅ Comprehensive metrics analysis (precision, recall, F1, confusion matrix)
+- **Training Dynamics**: ✅ Understanding loss curves, accuracy plots, and convergence patterns
+- **Bias-Variance Trade-off**: ✅ Balanced model complexity with generalization capability
 
-**In Progress:**
-- **Training Loops**: Learning to train models with proper validation
+**Achievements:**
+- 🎯 **80% Validation Accuracy** (from 72% baseline)
+- 🎯 **0.76 F1-Score** for disaster classification
+- 🎯 **13% Train/Val Gap** (healthy generalization)
+- 🎯 **4 Successful Iterations** with systematic improvements
 
-**Ready for Model Training!** 🚀
+**Ready for Kaggle Submission!** 🚀
 
 ---
 
